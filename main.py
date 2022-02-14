@@ -8,6 +8,12 @@ WINDOW = tk.Tk()
 
 APP = App(WINDOW)
 
-WINDOW.mainloop()
 
-DBHandler.destroy()
+def on_closing():
+    WINDOW.destroy()
+    DBHandler.destroy()
+
+
+WINDOW.protocol("WM_DELETE_WINDOW", on_closing)
+
+WINDOW.mainloop()

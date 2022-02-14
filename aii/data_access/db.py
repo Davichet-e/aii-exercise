@@ -18,18 +18,19 @@ class DBHandler:
     def destroy():
         DBHandler._con.close()
 
-    def has_stored_news(self):
+    def has_stored_news(self) -> bool:
         self._cur.execute(
-            """ SELECT COUNT(name) FROM sqlite_master WHERE type='table' AND name='news' """
+            """ SELECT COUNT(name) FROM sqlite_temp_master WHERE type='table' AND name='news' """
         )
 
         return self._cur.fetchone()[0] == 1
 
     def _create_news_table(self):
+        self._cur.execute("""DROP TABLE IF EXISTS news""")
         self._cur.execute(
             """
         CREATE TABLE news(
-            news_id INTEGER PRIMARY KEY NOT NULL,
+            news_id INTEGER PRIMARY KEY AUTOINCREMENT,
             title VARCHAR(100) NOT NULL,
             link VARCHAR(50) NOT NULL,
             publication_date VARCHAR(50) NOT NULL
@@ -39,7 +40,6 @@ class DBHandler:
 
     def retrieve_stored_news(self) -> list[News]:
         try:
-
             return [
                 News(
                     title,

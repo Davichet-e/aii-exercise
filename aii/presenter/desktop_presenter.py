@@ -50,6 +50,7 @@ class App:
         tk.Label(self._frame, text=text).grid(column=0, row=1)
 
     def show_news(self):
+        # FIXME When already in database, should just retrive from there
         if self.news is None:
             text = "Obtén las noticias primero, pulsa en `Almacenar`"
         else:
