@@ -19,7 +19,7 @@ class News(NamedTuple):
     date: datetime.datetime
 
     def __str__(self):
-        return "\n".join([str(elem) for elem in [*self]])
+        return "\n".join([str(elem) for elem in self])
 
     @classmethod
     def from_bs4_tag(

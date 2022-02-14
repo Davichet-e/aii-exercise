@@ -1,5 +1,5 @@
 import tkinter as tk
-from aii.data_access.db import DBHandler
+from aii.repositories.sqlite_repository import DBHandler
 
 from aii.presenter.desktop_presenter import App
 

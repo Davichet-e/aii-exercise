@@ -1,11 +1,11 @@
 import tkinter as tk
 
-from aii.data_access.exceptions import DatabaseException
+from aii.repositories.exceptions import DatabaseException
 
 from aii.data_handler.exceptions import RetrieveNewsException
 from aii.data_handler.news_handler import retrieve_news
 from aii.entities.news import News
-from aii.data_access.db import DBHandler
+from aii.repositories.sqlite_repository import DBHandler
 
 
 class App:

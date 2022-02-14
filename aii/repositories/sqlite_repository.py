@@ -1,6 +1,6 @@
 from datetime import datetime
 import sqlite3
-from aii.data_access.exceptions import DatabaseException
+from aii.repositories.exceptions import DatabaseException
 
 from aii.entities.news import News
 

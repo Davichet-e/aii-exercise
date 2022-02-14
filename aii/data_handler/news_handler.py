@@ -1,7 +1,7 @@
 import enum
 import httpx
-from aii.data_access.db import DBHandler
-from aii.data_access.exceptions import DatabaseException
+from aii.repositories.sqlite_repository import DBHandler
+from aii.repositories.exceptions import DatabaseException
 from aii.data_handler.exceptions import RetrieveNewsException
 from aii.entities.news import News
 import bs4
