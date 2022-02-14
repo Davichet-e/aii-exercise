@@ -1,5 +1,5 @@
-from calendar import month
 import tkinter as tk
+from tkinter import messagebox
 from typing import Callable
 
 from aii.services.exceptions import (
@@ -52,7 +52,7 @@ class App:
         else:
             text = "BD creada correctamente"
 
-        tk.Label(self._frame, text=text).grid(column=0, row=1)
+        messagebox.showinfo("Información", text)
 
     def show_news(self):
         try:
@@ -88,7 +88,10 @@ class App:
             text = "Obtén las noticias primero, pulsa en `Almacenar`"
 
         else:
-            text = "\n\n".join(list(map(str, self.news)))
+            if len(self.news) == 0:
+                text = "No existen noticias con esa fecha"
+            else:
+                text = "\n\n".join(list(map(str, self.news)))
 
         ShowTextWindow(self._frame, text).grid()
 
@@ -109,7 +112,10 @@ class App:
             text = "Obtén las noticias primero, pulsa en `Almacenar`"
 
         else:
-            text = "\n\n".join(list(map(str, self.news)))
+            if len(self.news) == 0:
+                text = "No existen noticias con esa fecha"
+            else:
+                text = "\n\n".join(list(map(str, self.news)))
 
         ShowTextWindow(self._frame, text).grid()
 
@@ -126,12 +132,10 @@ class ShowFilterByWindow(tk.Toplevel):
         month_input = tk.Entry(self, textvariable=str_var)
         month_input.grid(column=2, row=0)
 
-        month_input.bind("<Return>", lambda: self.callback(callback))
+        month_input.bind("<Return>", lambda _event: self.callback(callback))
 
 
 class ShowTextWindow(tk.Toplevel):  # Create a window
     def __init__(self, master, text: str):
         super().__init__(master)
-        tk.Label(self, text=text, anchor="w", justify=tk.LEFT).pack(
-            side=tk.LEFT
-        )
+        tk.Label(self, text=text, anchor="w", justify=tk.LEFT).pack(side=tk.LEFT)
