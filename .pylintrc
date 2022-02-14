@@ -1,0 +1,2 @@
+[MASTER]
+init-hook='import sys; sys.path.append(r"C:\Users\david\Dropbox\Proyectos VSCode\Python proyects\aii\aii")'
