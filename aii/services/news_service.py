@@ -2,7 +2,7 @@ import enum
 import httpx
 from aii.repositories.sqlite_repository import DBHandler
 from aii.repositories.exceptions import DatabaseException
-from aii.data_handler.exceptions import RetrieveNewsException
+from aii.services.exceptions import RetrieveNewsException
 from aii.entities.news import News
 import bs4
 
@@ -19,6 +19,7 @@ def retrieve_news(url: str, mode: Mode = Mode.XML) -> list[News]:
     """Retrieve a list with the news of the url.
     """
     if _db_handler.has_stored_news():
+        print("Here")
         try:
             return _db_handler.retrieve_stored_news()
         except DatabaseException as exception:

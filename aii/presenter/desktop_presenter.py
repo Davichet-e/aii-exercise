@@ -2,8 +2,8 @@ import tkinter as tk
 
 from aii.repositories.exceptions import DatabaseException
 
-from aii.data_handler.exceptions import RetrieveNewsException
-from aii.data_handler.news_handler import retrieve_news
+from aii.services.exceptions import RetrieveNewsException
+from aii.services.news_service import retrieve_news
 from aii.entities.news import News
 from aii.repositories.sqlite_repository import DBHandler
 
@@ -41,7 +41,7 @@ class App:
     def retrieve_news(self):
         """Retrieve the news and display a message."""
         try:
-            self.news = retrieve_news(self.URL)
+            store_news(self.URL)
         except RetrieveNewsException as exception:
             text = str(exception)
         else:
@@ -50,6 +50,7 @@ class App:
         tk.Label(self._frame, text=text).grid(column=0, row=1)
 
     def show_news(self):
+        self.news = retrieve_news()
         # FIXME When already in database, should just retrive from there
         if self.news is None:
             text = "Obtén las noticias primero, pulsa en `Almacenar`"

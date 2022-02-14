@@ -1,8 +1,8 @@
-from datetime import datetime
 import sqlite3
-from aii.repositories.exceptions import DatabaseException
+from datetime import datetime
 
 from aii.entities.news import News
+from aii.repositories.exceptions import DatabaseException
 
 
 class DBHandler:
@@ -50,11 +50,15 @@ class DBHandler:
                     """SELECT * FROM news"""
                 )
             ]
-        except sqlite3.OperationalError as e:
-            raise DatabaseException("An error related to the database ocurred.") from e
+        except sqlite3.OperationalError as exception:
+            raise DatabaseException(
+                "An error related to the database ocurred."
+            ) from exception
 
     def insert_news(self, news: list[News]) -> None:
         try:
             self._cur.executemany("INSERT INTO news VALUES (?)", news)
-        except sqlite3.OperationalError as e:
-            raise DatabaseException("An error related to the database ocurred.") from e
+        except sqlite3.OperationalError as exception:
+            raise DatabaseException(
+                "An error related to the database ocurred."
+            ) from exception
